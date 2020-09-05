@@ -1,0 +1,27 @@
+---
+title: "analysis"
+author: "Francisco Rodríguez y Alejandro Gonzalez"
+date: "04-09-2020"
+output: html_document
+---
+#Se carga la base procesada
+```{r, echo=FALSE}
+load("input/data/proc/data.RData")
+```
+
+#Tabla 1, se genera y se guarda 
+```{r, echo=FALSE}
+
+sink("output/tables/tabla1.png")
+stargazer(data, type = "text", digits=1)
+sink()
+```
+
+#Gráfico 1, se genera y se guarda
+```{r, echo=FALSE}
+ggplot(data = data) +
+  geom_point(mapping = aes(Escala_Ingresos, y = Satisfaccion_Vida))
+dev.copy(png,"Output/graphs/gráfico1.png",width=600,
+        height=600); dev.off()
+
+```
