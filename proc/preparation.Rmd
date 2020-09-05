@@ -1,0 +1,29 @@
+---
+title: "preparation"
+author: "Francisco Rodríguez y Alejandro Gonzalez"
+date: "04-09-2020"
+output: html_document
+---
+
+#Se cargan los paquetes y activan librerías
+```{r include = FALSE}
+install.packages("citr",repos = "http://cran.us.r-project.org")
+library(citr)
+install.packages("ggplot2",repos = "http://cran.us.r-project.org")
+library(ggplot2)
+install.packages("stargazer",repos = "http://cran.us.r-project.org")
+library(stargazer)
+```
+
+#Se carga la base de datos, luego se modifica y guarda
+```{r include = FALSE}
+load("input/data/original/ELSOC_W01_v3.10_R.RData")
+View(proc_elsoc)
+data=elsoc_2016[,c("s01","m30","m0_sexo")]
+names (data) = c("Satisfaccion_Vida", "Escala_Ingresos", "Género")
+data[data=="-999"]<- NA
+data[data=="-888"]<- NA
+data<-na.omit(data)
+save(data, file = "input/data/proc/data.RData")
+
+```
